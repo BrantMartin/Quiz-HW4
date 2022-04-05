@@ -4,6 +4,7 @@ let button2 = document.getElementById('2')
 let button3 = document.getElementById('3')
 let button4 = document.getElementById('4')
 let header3 = document.getElementById('h3')
+let timer = document.getElementById('timer')
 let quizBtnVar = document.getElementById('quizBtn')
 let questionSec = document.getElementById('questions')
 let questionCont = document.getElementById('question-container')
@@ -34,6 +35,9 @@ let questionArr = [
     }
 ]
 let score = 0
+let timerObj;
+let timerCounter = 30
+
 questionCont.style.display = 'none'
 
 quizBtnVar.addEventListener('click', startQuiz);
@@ -44,8 +48,19 @@ button3.addEventListener('click', rightWrongFunc)
 button4.addEventListener('click', rightWrongFunc)
 
 function startQuiz() {
-     questionCont.style.display = 'block'
+
+    questionCont.style.display = 'block'
    quizBtnVar.style.display = 'none'
+   timerObj = setInterval(function(){
+       timer.textContent = timerCounter
+       if (timerCounter > 0) {
+           timerCounter--
+       }
+       else {
+        timer.textContent = "Time's Up!"
+        showScore()
+       }
+   },1000)
    displayQuestions()
 }
 
@@ -80,5 +95,6 @@ function rightWrongFunc() {
 
 function showScore() {
     questionCont.style.display = 'none'
-    
+    clearInterval(timerObj)
+
 }
