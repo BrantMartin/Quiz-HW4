@@ -33,10 +33,15 @@ let questionArr = [
         answer:"3"
     }
 ]
-
+let score = 0
 questionCont.style.display = 'none'
 
 quizBtnVar.addEventListener('click', startQuiz);
+
+button1.addEventListener('click', rightWrongFunc)
+button2.addEventListener('click', rightWrongFunc)
+button3.addEventListener('click', rightWrongFunc)
+button4.addEventListener('click', rightWrongFunc)
 
 function startQuiz() {
      questionCont.style.display = 'block'
@@ -52,4 +57,28 @@ function displayQuestions() {
     button2.textContent = questionArr[questionNumber].ch2
     button3.textContent = questionArr[questionNumber].ch3
     button4.textContent = questionArr[questionNumber].ch4
+}
+
+function rightWrongFunc() {
+    var userAns = this.getAttribute('id')
+    if ( userAns === questionArr[questionNumber].answer ){
+        score += 10// score = score +10
+        header3.textContent = 'Correct'
+    }
+    else  {
+        header3.textContent = 'Incorrect'
+    }
+     if (questionNumber < questionArr.length - 1) {
+         questionNumber ++
+         displayQuestions()
+     }
+     else {
+         showScore()
+     }
+        
+}
+
+function showScore() {
+    questionCont.style.display = 'none'
+    
 }
